@@ -85,7 +85,7 @@ const getData = function(){
                 <h1>name: ${item.name}</h1>
                 <h2>speed&nbsp;: ${item.speed} km/h</h2>
                 <h2>price&nbsp; : $${item.price}</h2>
-                <h2 style="background: ${item.color}; padding:2px 4px; border-radius:10px;">color&nbsp; :  ${item.color}</h2>
+                <h2 style="color: ${item.color}; padding:2px 4px; border-radius:10px;">color&nbsp; :  ${item.color}</h2>
                 <i class="fa-solid fa-trash" onclick="del(${i})"></i>
             </div>
         </div>`
