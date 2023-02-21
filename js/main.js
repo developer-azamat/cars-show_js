@@ -28,11 +28,16 @@ window.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             load.classList.add("zero")
         },600)
-    },1500)
+    },1300)
 })
 
 btn.addEventListener("click", ()=>{
     form.classList.toggle("active")
+    if (btn.textContent== "+ add card"){
+        btn.textContent= "Close"
+    } else {
+        btn.textContent= "+ add card"
+    }
 })
 
 let cars = JSON.parse(localStorage.getItem("cars")) ? JSON.parse(localStorage.getItem("cars")) : []
@@ -43,13 +48,15 @@ const setData = function (){
     let manzil = url.value.trim()
     let tezlik = speed.value
     let rang = color.value
+    const id = Math.random()
     if (!ism =="" && narx > 0 && !manzil=="" && tezlik > 0 ){
         let obj ={
             name: ism,
             speed: tezlik,
             price: narx,
             color: rang,
-            url: manzil
+            url: manzil, 
+            id: id
         }
         cars.push(obj)  
         localStorage.setItem("cars",JSON.stringify(cars))
@@ -68,9 +75,9 @@ const getData = function(){
     let useData = JSON.parse(localStorage.getItem("cars"))
     
     right.innerHTML = ""
-    useData.forEach((item) => {
+    useData.forEach((item, i) => {
         right.innerHTML += `
-        <div class="card" style="color:${item.color}" data-aos="flip-left"
+        <div class="card" data-aos="flip-left"
         data-aos-easing="ease-out-cubic"
         data-aos-duration="2000">
                 <img src="${item.url}" alt="">
@@ -78,8 +85,8 @@ const getData = function(){
                 <h1>name: ${item.name}</h1>
                 <h2>speed&nbsp;: ${item.speed} km/h</h2>
                 <h2>price&nbsp; : $${item.price}</h2>
-                <h2>color&nbsp; :  ${item.color}</h2>
-                <i class="fa-solid fa-trash"></i>
+                <h2 style="background: ${item.color}; padding:2px 4px; border-radius:10px;">color&nbsp; :  ${item.color}</h2>
+                <i class="fa-solid fa-trash" onclick="del(${i})"></i>
             </div>
         </div>`
         })
@@ -87,35 +94,25 @@ const getData = function(){
 
     
     
-    submit.addEventListener("click", (e)=>{
-        e.preventDefault()
+    submit.addEventListener("click", ()=>{
+      
         setData()
     })
     
     
     getData()
 
-
-window.addEventListener("click", (e)=>{
-    let target = e.target
-    if(target.classList.contains("fa-trash")){
-        cars.filter((item, index)=>{
-            cars.splice(index, 1)
-            localStorage.setItem("cars",JSON.stringify(cars))
-            getData()
+    function del(id){
+        const delTodo = cars.filter((item, i) =>{
+            return  i !== id
         })
-    }
-})
-// localStorage.clear()
+        cars = delTodo
+        localStorage.setItem('cars', JSON.stringify(cars))
+        getData()
+     }
 
 
 
-//     if(target.classList.contains("fa-trash")){
-//         cars.filter((item, index)=>{
-//             localStorage.setItem("car", JSON.stringify(item))
-//             getData()
-//         })
-//     }
 
 
 

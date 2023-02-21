@@ -62,7 +62,7 @@ input {
 .btn{
     padding: 10px 20px;
     background-color: white;
-    border: none;
+    border: none ;
     border-radius: 1pc 0 1pc 0;
     font-size: large;
     font-weight: 700;
@@ -71,7 +71,7 @@ input {
     position: relative;
     margin-top: 20px;
     transition: all .4s linear;
-
+    overflow: hidden;
 }
 .btn::after{
     content: "";
@@ -111,6 +111,8 @@ input {
     color: blue;
     z-index: 22;
     transition: all .4s linear;
+    overflow: hidden;
+
 }
 .add-card::after{
     content: "";
